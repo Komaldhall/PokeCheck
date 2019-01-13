@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <title>PokeCheck</title>
+    <script type="text/JavaScript">
+        $(document).ready(function(){
+            $.get("https://pokeapi.co/api/v2/generation/3/", function(pok) {
+                var html_str='';
+                for(var j=0; j<pok.pokemon_species.length; j++){
+                    $.get(pok.pokemon_species[j].url, function(spec) {
+                        html_str+='<div class="col s3">';
+                            html_str+='<div class="card-panel">';
+                                html_str+='<span class="black-text">';
+                                    html_str+='<h5><i class="material-icons">data_usage</i>'+spec.name.substr(0,1).toUpperCase()+spec.name.substr(1)+'</h5>';
+                                    // html_str+='<p>Id : '+ spec.id +'</p>';
+                                    html_str+='<h6><i class="material-icons" style=color:'+spec.color.name+'>vpn_key</i>'+spec.id+'</h6>';  
+                                    html_str+='<p>Shape : '+ spec.shape.name.substr(0,1).toUpperCase()+spec.shape.name.substr(1) +'</p>';
+                                    html_str+='<p>Growth : '+ spec.growth_rate.name.substr(0,1).toUpperCase()+spec.growth_rate.name.substr(1) +'</p>';
+                                    // html_str+='<p>Color : '+spec.color.name.substr(0,1).toUpperCase()+spec.color.name.substr(1) +'</p>';
+                                    html_str+='<p>Habitat : '+spec.habitat.name.substr(0,1).toUpperCase()+spec.habitat.name.substr(1) +'</p>';
+                                html_str+='</span>';
+                            html_str+='</div>';
+                        html_str+='</div>';
+                    $("#pok").html(html_str);
+                    });
+                }
+            }, "json");
+            $(".dropdown-trigger").dropdown();
+            $('.sidenav').sidenav();      
+        });
+    </script>
+    <style>
+        .align{
+            text-align:center;
+        }
+        .page-footer{
+            padding:18px;
+            text-align: center;
+        }
+        .back{
+            background-image: linear-gradient(to left,#cc2b5e,#753a88);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-wrapper back">
+            <a href="/" class="brand-logo"><i class="large material-icons">donut_small</i>PokeCheck</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <!-- <li><a class="dropdown-trigger" data-target="dropdown1">Generation<i class="material-icons right">arrow_drop_down</i></a></li> -->
+                <li><a href="/gen1" class="waves-effect waves-light">Gen-I</a></li>
+                <li><a href="/gen2" class="waves-effect waves-light">Gen-II</a></li>
+                <li><a href="/gen3" class="waves-effect waves-light">Gen-III</a></li>
+                <li><a href="/gen4" class="waves-effect waves-light">Gen-IV</a></li>
+                <li><a href="/gen5" class="waves-effect waves-light">Gen-V</a></li>
+                <li><a href="/gen6" class="waves-effect waves-light">Gen-VI</a></li>
+                <li><a href="/gen7" class="waves-effect waves-light">Sun-Moon</a></li>
+            </ul>
+            <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul id="mobile-nav" class="sidenav">
+            <!-- <li><a class="dropdown-trigger" data-target="dropdown1">Generation<i class="material-icons right">arrow_drop_down</i></a></li> -->
+                <li><a href="/gen1" class="waves-effect waves-light">Gen-I</a></li>
+                <li><a href="/gen2" class="waves-effect waves-light">Gen-II</a></li>
+                <li><a href="/gen3" class="waves-effect waves-light">Gen-III</a></li>
+                <li><a href="/gen4" class="waves-effect waves-light">Gen-IV</a></li>
+                <li><a href="/gen5" class="waves-effect waves-light">Gen-V</a></li>
+                <li><a href="/gen6" class="waves-effect waves-light">Gen-VI</a></li>
+                <li><a href="/gen7" class="waves-effect waves-light">Sun-Moon</a></li>
+            </ul>
+        </div>
+    </nav>
+    <br>
+    <div class="row">
+        <div id="pok" class="align"></div>
+    </div>
+    <footer class="page-footer back">
+        <div class="container">
+            Contributed By Komal Dhall
+        </div>
+    </footer> 
+</body>
+</html>
